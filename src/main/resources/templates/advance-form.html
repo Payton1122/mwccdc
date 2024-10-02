@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" href="advance.css"/>
+</head>
+<body>
+<p>Good One</p>
+	<table>
+		<tr><td>Table to Iterate over Map for User Info</td></tr>
+			<tr th:each="entry : ${users}">
+		        <td th:text="${entry.key}"></td>
+		        <td>
+		            <table>
+		                <tr th:each="value : ${entry.value}">
+		                    <td th:text="${value}"></td>
+		                </tr>
+		            </table>
+		        </td>
+		    </tr>
+	</table>
+</body>
+</html>
