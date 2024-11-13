@@ -1,0 +1,43 @@
+<!doctype html>
+<html layout:decorate="~{Layout/project-layout}" lang="en">
+  <head>
+  </head>
+  <body>
+  	<div class="container mt-5">
+  		<a layout:fragment="summaryLink" class="nav-link active">Preference Summary</a>
+  		<a layout:fragment="gatheringLink" class="nav-link">Preference Gathering</a>
+	    <div layout:fragment="goodDiv" >
+	    	<table class="table table-hover">
+	    	<thead>
+		    	<tr>
+		    		<th>Stand Position</th>
+		    		<th>Number of Available Seats</th>
+		    		<th>Number of Preferred Seats</th>
+		    		<th>Discount Price Per Ticket</th>
+		    		<th>Estimated Total Earnings</th>
+		    	</tr>
+	    	</thead>
+	    	<tbody>
+	    		<tr th:each="stand : ${stand}">
+				    <td>
+				    	<div class="row_data" col_name="standPosition" th:attr="col_val=${stand.standPosition}" th:text="${stand.standPosition}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="availableSeats" th:attr="col_val=${stand.availableSeats}" th:text="${stand.availableSeats}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="preferredSeat" th:attr="col_val=${stand.preferredSeat}" th:text="${stand.preferredSeat}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="discountPPTicket" th:attr="col_val=${stand.discountPPTicket}" th:text="'$' + ${stand.discountPPTicket}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="estTotalEarnings" th:attr="col_val=${stand.estTotalEarnings}" th:text="'$' + ${stand.estTotalEarnings}"></div>
+				    </td>
+				</tr>
+	    	</tbody>
+	    	</table>
+	    </div>
+	</div>
+   </body>
+</html>

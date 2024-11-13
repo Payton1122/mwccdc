@@ -1,0 +1,52 @@
+<!doctype html>
+<html layout:decorate="~{Layout/project-layout}" lang="en">
+  <head>
+  	<script src="../project-reward.js"></script>
+  </head>
+  <body>
+  	<div class="container mt-5">
+  		<a layout:fragment="summaryLink" class="nav-link">Preference Summary</a>
+  		<a layout:fragment="gatheringLink" class="nav-link">Preference Gathering</a>
+	    <div layout:fragment="goodDiv" >
+	    	<div class="my-5">
+	    		<label for="filterInput">Search:</label>
+				<input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Search...">
+	    	</div>
+	    	<table id="rewardedFansTable" class="table table-hover">
+	    	<thead>
+		    	<tr>
+		    		<th>First Name</th>
+		    		<th>Last Name</th>
+		    		<th>Email</th>
+		    		<th>Phone</th>
+		    		<th>Stand Position</th>
+		    		<th>Seat Number</th>
+		    	</tr>
+	    	</thead>
+	    	<tbody>
+	    		<tr th:each="RewardedFan : ${RewardedFan}">
+				    <td>
+				    	<div class="row_data" col_name="firstName" th:attr="col_val=${RewardedFan.firstName}" th:text="${RewardedFan.firstName}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="lastName" th:attr="col_val=${RewardedFan.lastName}" th:text="${RewardedFan.lastName}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="email" th:attr="col_val=${RewardedFan.email}" th:text="${RewardedFan.email}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="phone" th:attr="col_val=${RewardedFan.phone}" th:text="${RewardedFan.phone}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="standPosition" th:attr="col_val=${RewardedFan.standPosition}" th:text="${RewardedFan.standPosition}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="SeatNumber" th:attr="col_val=${RewardedFan.seatNumber}" th:text="${RewardedFan.seatNumber}"></div>
+				    </td>
+				</tr>
+	    	</tbody>
+	    	</table>
+	    </div>
+	</div>
+   </body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html layout:decorate="~{Layout/base-layout}" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </head>
+  <body>
+  	<div class="container mt-5">
+  		<div class="w-100 bg-success" id="msg"></div>
+	    <div layout:fragment="goodDiv">
+	    	<table class="table table-hover">
+	    	<thead>
+		    	<tr>
+		    		<th>User Name</th>
+		    		<th>Task Name</th>
+		    		<th>Task Type</th>
+		    		<th>Score</th>
+		    		<th>Remark</th>
+		    		<th>Date</th>
+		    		<th>Description</th>
+		    	</tr>
+	    	</thead>
+	    	<tbody>
+	    		<tr th:each="ccdcuser: ${ccdcusers}">
+		    		<td th:text="$ccdcuser.uName}"></td>
+		    		<td>Task Name</td>
+		    		<td>Task Type</td>
+		    		<td>Score</td>
+		    		<td>Remark</td>
+		    		<td>Date</td>
+		    		<td>Description</td>
+		    	</tr>
+	    	</tbody>
+	    	</table>
+	    </div>
+	    <div id="btn_save" class="w-100 text-center bg-info"><a class="btn text-white">SAVE</a></div>
+	    <script type="text/javascript">
+	    	$(document).ready(function($) {
+		    	$(document).on("click", ".row_data", function(event){
+		    		event.preventDefault(); 
+		    		var ele = $(this);
+		    		if(ele.attr("col_name") != "score" && ele.attr("col_name") != "remark") {
+		    			return false;
+		    		}
+		    		
+		    		ele.attr("contenteditable", "true");
+		    		ele.addClass("bg-warning");
+		    		ele.focus();
+		    		
+		    	});
+		    	
+		    	$(document).on("focusout", ".row_data", function(event){
+		    		
+		    		var ele = $(this);
+		    		
+		    		if(ele.attr("col_val" == ele.html())){
+		    			ele.removeClass("bg-warning");
+		    		}
+		    	});
+		    	
+		    	$document.on("click", "#btn_save", function(event) {
+		    		var dataArray = [];
+		    		var scoreMap = new Map();
+		    		$(".bg-warning").each(function() {
+		    			var ele = $(this);
+		    			var trEle = ele.closest("tr");
+		    			var uname = trEle.find("div[col_name=uName]").html();
+		    			var tname = trEle.find("div[col_name=tName]").html();
+		    			if(!scoreMap.has(uname+tname)){
+		    				dataArray.push({"uName":uname});
+			    			scoreMap.set(uname+tname, "Y")
+		    			}
+		    		})
+		    	})
+		    	
+		    	if(dataArray.length == 0) {
+		    		return;
+		    	}
+		    	
+		    	var jsonData = JSON.stringify(dataArray);
+		    	console.log(jsonData);
+		    	
+		    	//callback functions
+		    	$.ajax({
+		    		url:"/api/savepoints",
+		    		type:"POST",
+		    		contentType:"application/json",
+		    		data:jsonData,
+		    		success:function(response){
+		    			$('#msg').text("success").show().fadeOut(2000);
+		    			$(".bg-warning").each(function(){
+		    				var ele = $(this);
+		    				ele.removeClass("bg-warning");
+		    			});
+		    		},
+		    		error:function(xhr, status, error){
+		    			$('#msg').text("failed").show().fadeOut(2000);
+		    		}
+		    	})
+		    
+	    	});
+	    </script>
+	</div>
+   </body>
+</html>

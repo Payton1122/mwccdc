@@ -1,0 +1,118 @@
+<!doctype html>
+<html layout:decorate="~{Layout/project-layout}" lang="en">
+  <head>
+  	<script src="../project.js"></script>
+  </head>
+  <body>
+  	<div class="container mt-5">
+  		<a layout:fragment="summaryLink" class="nav-link">Preference Summary</a>
+  		<a layout:fragment="gatheringLink" class="nav-link active">Preference Gathering</a>
+	    <div layout:fragment="goodDiv">
+	    	<table class="table table-hover">
+	    	<thead>
+		    	<tr>
+		    		<th>First Name</th>
+		    		<th>Last Name</th>
+		    		<th>Email</th>
+		    		<th>Phone</th>
+		    		<th>First Occupation</th>
+		    		<th>Preferred Stand</th>
+		    		<th>Reservation Time</th>
+		    	</tr>
+	    	</thead>
+	    	<tbody>
+	    		<tr th:each="fan : ${fan}">
+				    <td>
+				    	<div class="row_data" col_name="firstName" th:attr="col_val=${fan.firstName}" th:text="${fan.firstName}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="lastName" th:attr="col_val=${fan.lastName}" th:text="${fan.lastName}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="email" th:attr="col_val=${fan.email}" th:text="${fan.email}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="phone" th:attr="col_val=${fan.phone}" th:text="${fan.phone}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="firstOccupation" th:attr="col_val=${fan.firstOccupation}" th:text="${fan.firstOccupation}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="preferredStand" th:attr="col_val=${fan.preferredStand}" th:text="${fan.preferredStand}"></div>
+				    </td>
+				    <td>
+				    	<div class="row_data" col_name="reservationTime" th:attr="col_val=${fan.reservationTime}" th:text="${fan.reservationTime}"></div>
+				    </td>
+				</tr>
+	    	</tbody>
+	    	</table>
+	    	<div class="row">
+		        <form class="w-100"> 
+		        	<div class="row mt-3">
+			            <div class="form-group col-3">
+			                <label for="fNameInput">First Name</label>
+			                <input id="fNameInput" class="form-control" type="text">
+			            </div>
+			            <div class="form-group col-3">
+			                <label for="lNameInput">Last Name</label>
+			                <input id="lNameInput" class="form-control" type="text">
+			            </div>
+			            <div class="form-group col-3">
+			                <label for="email">Email</label>
+			                <input id="email" class="form-control" type="text">
+			            </div>
+			            <div class="form-group col-3">
+			                <label for="phoneNum">Phone Number</label>
+			                <input id="phoneNum" class="form-control" type="text">
+			            </div>
+			        </div>
+		            <div class="row my-3">
+			            <div class="form-group col-3">
+			                <label for="fOccupation">First Occupation</label>
+			                <select id="fOccupation" class="form-control">
+			                	<option value="" disabled selected>Select an Option</option>
+			                	<option value="STU">Student</option>
+			                	<option value="EDU">Educator</option>
+			                	<option value="MLT">Military</option>
+			                	<option value="OTH">Other</option>
+			                </select>
+			            </div>
+			            <div class="form-group col-3">
+			                <label for="pStand">Preferred Stand</label>
+			                <select id="pStand" class="form-control">
+			                	<option value="" disabled selected>Select an Option</option>
+			                	<option value="NORTH">North</option>
+			                	<option value="WEST">West</option>
+			                	<option value="EAST">East</option>
+			                	<option value="SOUTH">South</option>
+			                </select>
+			            </div>
+			            <div class="form-group col-3">
+			                <label for="resTime">Reservation Time</label>
+			                <input id="resTime" class="form-control" type="text">
+			            </div>
+			        </div>
+		        </form>
+		        <div class="row">
+		    		<div class="col-8 text-center">
+		    			<div class="d-flex">
+			    			<button id="importButton" class="btn btn-primary text-white w-25">Import</button>
+			    			<input type="file" id="fileInput" style="display: none;">
+			    			<button id="addButton" type="submit" class="btn btn-success text-white w-25">Add</button>
+				    	</div>
+			    	</div>
+			    </div>
+			    <div class="row my-4">
+		    		<div class="col-8 text-center">
+		    			<div class="d-flex">
+			    			<button id="importAppendButton" class="btn btn-primary text-white w-25">Import & Append</button>
+			    			<input type="file" id="fileAppendInput" style="display: none;">
+			    			<button id="rewardButton" type="submit" class="btn btn-success text-white w-25">Reward</button>
+				    	</div>
+			    	</div>
+			    </div>
+		    </div>
+	    </div>
+	</div>
+   </body>
+</html>
